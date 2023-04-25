@@ -57,8 +57,8 @@ function buildCard(book) {
 
 function renderLibrary(books) {
   // delete all cards
-  const current = document.querySelectorAll('.card');
-  current.forEach(child => {
+  const current = document.querySelectorAll(".card");
+  current.forEach((child) => {
     child.remove();
   });
 
@@ -68,14 +68,11 @@ function renderLibrary(books) {
   });
 }
 
-
-
 // Test cases
 const theHobbit = new Book("The Hobbit", "J.R.R. Tolkien", 295, false);
 addBookToLibrary(theHobbit);
 
 renderLibrary(myLibrary);
-
 
 function handleSubmit(e) {
   e.preventDefault();

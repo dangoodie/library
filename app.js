@@ -24,10 +24,6 @@ function addBookToLibrary(book) {
   }
 }
 
-
-
-// console.log(myLibrary);
-
 function buildCard(book) {
   // build card div
   const card = document.createElement("div");
@@ -59,14 +55,45 @@ function buildCard(book) {
   card.appendChild(readStatus);
 }
 
-function renderLibrary (books) {
-  books.forEach(book => {
+function renderLibrary(books) {
+  // delete all cards
+  const current = document.querySelectorAll('.card');
+  current.forEach(child => {
+    child.remove();
+  });
+
+  // render all cards
+  books.forEach((book) => {
     buildCard(book);
   });
 }
+
+
 
 // Test cases
 const theHobbit = new Book("The Hobbit", "J.R.R. Tolkien", 295, false);
 addBookToLibrary(theHobbit);
 
 renderLibrary(myLibrary);
+
+
+function handleSubmit(e) {
+  e.preventDefault();
+  const data = new FormData(e.target);
+  const newBook = new Book();
+
+  newBook.title = data.get("bookTitle");
+  newBook.author = data.get("author");
+  newBook.pages = data.get("pages");
+  if (data.get("readStatus")) {
+    newBook.readStatus = true;
+  } else {
+    newBook.readStatus = false;
+  }
+
+  addBookToLibrary(newBook);
+  renderLibrary(myLibrary);
+}
+
+const form = document.querySelector("form");
+form.addEventListener("submit", handleSubmit);

@@ -7,21 +7,33 @@
 
 .container {
   display: grid;
-  grid-template-rows: 80px 1fr;
+  grid-template-rows: minmax(80px, auto) 1fr;
 }
 
 .header {
-  color: white;
+  
   background-color: #15803d;
-  font-weight: 900;
-  font-style: italic;
-  font-size: 3rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  display: grid;
+  grid-template-columns: 200px 1fr 200px;
   box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.2);
   z-index: 1;
 }
+
+.header > div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.title {
+  color: white;
+  font-weight: 900;
+  font-style: italic;
+  font-size: 3rem;
+  margin: 0;
+  text-align: center;
+}
+
 
 /* Books grid area */
 

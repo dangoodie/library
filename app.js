@@ -24,8 +24,7 @@ function addBookToLibrary(book) {
   }
 }
 
-const theHobbit = new Book("The Hobbit", "J.R.R. Tolkien", 295, "not read yet");
-addBookToLibrary(theHobbit);
+
 
 // console.log(myLibrary);
 
@@ -42,7 +41,7 @@ function buildCard(book) {
   const readStatus = document.createElement("div");
 
   // add classes
-  title.classList.add("title");
+  title.classList.add("book-title");
   author.classList.add("author");
   pages.classList.add("pages");
   readStatus.classList.add("read-status");
@@ -65,5 +64,9 @@ function renderLibrary (books) {
     buildCard(book);
   });
 }
+
+// Test cases
+const theHobbit = new Book("The Hobbit", "J.R.R. Tolkien", 295, false);
+addBookToLibrary(theHobbit);
 
 renderLibrary(myLibrary);

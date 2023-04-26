@@ -52,9 +52,9 @@ function buildCard(book, index) {
   exitBtn.classList.add("card-delete");
 
   // adding text
-  title.textContent = book.title;
-  author.textContent = book.author;
-  pages.textContent = book.pages;
+  title.textContent = `${book.title}`;
+  author.textContent = `by ${book.author}`;
+  pages.textContent = `${book.pages} pages`;
   anchor.href = "#";
   exitBtn.href = "#";
   exitBtn.innerHTML = '<span class="material-symbols-outlined"> close </span>';
@@ -87,6 +87,7 @@ function buildCard(book, index) {
   exitBtn.addEventListener('click', (e)=> {
     const i = e.target.parentNode.parentNode.dataset.index;
     myLibrary.splice(i, 1);
+    // eslint-disable-next-line no-use-before-define
     renderLibrary(myLibrary);
   })
 

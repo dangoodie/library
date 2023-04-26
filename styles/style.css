@@ -73,7 +73,35 @@
   z-index: 2;
   padding: 10px;
   box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
 }
+
+.card-delete {
+  align-self: flex-end;
+  color: black;
+}
+
+.book-title {
+  margin-top: 0;
+  font-weight: 700;
+  font-size: 2rem;
+  margin-bottom: 10px;
+}
+
+.author {
+  margin-top: 0;
+  font-size: 1.2rem;
+  m
+}
+
+.pages {
+  margin-top: 0;
+  font-size: 1.2rem;
+}
+
 
 .read-status {
   text-decoration: none;
@@ -81,17 +109,22 @@
 
 .read-status-btn {
   text-align: center;
-  width: 150px;
-  height: 30px;
   display: flex;
   align-items: center;
   justify-content: center;
   color: white;
   border-radius: 8px;
+  align-self: center;
+  width: 125px;
+  height: 40px;
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-bottom: 20px;
 }
 
+
 .read {
-  background-color: #15803d;
+  background-color: #15803c;
 }
 
 .not-read {

@@ -12,9 +12,9 @@ function Book(title, author, pages, readStatus, index) {
   this.readStatus = readStatus;
 }
 
-// Book.prototype.info = function () {
-//   return `${this.title} by ${this.author}, ${this.pages} pages, ${this.readStatus}`;
-// };
+Book.prototype.toggleRead = function () {
+  this.readStatus = !this.readStatus;
+};
 
 function addBookToLibrary(book) {
   if (typeof book === "object") {
@@ -31,6 +31,7 @@ function addBookToLibrary(book) {
 function buildCard(book, index) {
   // build card div
   const card = document.createElement("div");
+  card.dataset.index = index;
   card.classList.add("card");
   library.appendChild(card);
 
@@ -55,8 +56,8 @@ function buildCard(book, index) {
   anchor.href = "#";
 
   // set read status styling and text
-  function setReadStyle(book) {
-    if (book.readStatus) {
+  function setReadStyle(b) {
+    if (b.readStatus) {
       readStatus.textContent = "Read";
       readStatus.classList.add("read");
       readStatus.classList.remove("not-read");
@@ -67,11 +68,11 @@ function buildCard(book, index) {
     }
   }
   setReadStyle(book);
-  readStatus.dataset.index = index;
+  
 
   function handleReadStatus(e) {
-    const i = e.target.dataset.index;
-    myLibrary[i].readStatus = !myLibrary[i].readStatus;
+    const i = e.target.parentNode.parentNode.dataset.index;
+    myLibrary[i].toggleRead();
     setReadStyle(myLibrary[i]);
   }
   readStatus.addEventListener("click", handleReadStatus);

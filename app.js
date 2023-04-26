@@ -114,8 +114,8 @@ function renderLibrary(books) {
 }
 
 // Test cases
-const theHobbit = new Book("The Hobbit", "J.R.R. Tolkien", 295, false);
-addBookToLibrary(theHobbit);
+// const theHobbit = new Book("The Hobbit", "J.R.R. Tolkien", 295, false);
+// addBookToLibrary(theHobbit);
 
 renderLibrary(myLibrary);
 

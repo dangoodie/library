@@ -1,8 +1,9 @@
 const myLibrary = [];
 const library = document.querySelector(".library");
-const modal = document.querySelector(".modal-container");
 const addBookBtn = document.querySelector(".new-book");
 const form = document.querySelector("form");
+const modal = document.querySelector(".modal-container");
+const modalExit = document.querySelector(".modal-exit");
 
 function Book(title, author, pages, readStatus) {
   this.title = title;
@@ -11,9 +12,9 @@ function Book(title, author, pages, readStatus) {
   this.readStatus = readStatus;
 }
 
-Book.prototype.info = function () {
-  return `${this.title} by ${this.author}, ${this.pages} pages, ${this.readStatus}`;
-};
+// Book.prototype.info = function () {
+//   return `${this.title} by ${this.author}, ${this.pages} pages, ${this.readStatus}`;
+// };
 
 function addBookToLibrary(book) {
   if (typeof book === "object") {
@@ -91,20 +92,24 @@ function handleSubmit(e) {
     newBook.readStatus = false;
   }
 
-  document.getElementById('book-title').value = '';
+  document.getElementById("book-title").value = "";
   document.getElementById("author").value = "";
   document.getElementById("pages").value = "";
   document.getElementById("read").checked = false;
-  console.log(e);
 
   addBookToLibrary(newBook);
   renderLibrary(myLibrary);
   modal.classList.add("hidden");
 }
 
-
 form.addEventListener("submit", handleSubmit);
 
-addBookBtn.addEventListener('click', (e)=> {
+addBookBtn.addEventListener("click", (e) => {
+  e.preventDefault();
   modal.classList.remove("hidden");
-})
+});
+
+modalExit.addEventListener("click", (e) => {
+  e.preventDefault();
+  modal.classList.add("hidden");
+});

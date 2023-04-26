@@ -5,7 +5,7 @@ const form = document.querySelector("form");
 const modal = document.querySelector(".modal-container");
 const modalExit = document.querySelector(".modal-exit");
 
-function Book(title, author, pages, readStatus, index) {
+function Book(title, author, pages, readStatus) {
   this.title = title;
   this.author = author;
   this.pages = pages;
@@ -41,6 +41,7 @@ function buildCard(book, index) {
   const pages = document.createElement("p");
   const anchor = document.createElement("a");
   const readStatus = document.createElement("div");
+  const exitBtn = document.createElement("a");
 
   // add classes
   title.classList.add("book-title");
@@ -48,12 +49,15 @@ function buildCard(book, index) {
   pages.classList.add("pages");
   readStatus.classList.add("read-status-btn");
   anchor.classList.add("read-status");
+  exitBtn.classList.add("card-delete");
 
   // adding text
   title.textContent = book.title;
   author.textContent = book.author;
   pages.textContent = book.pages;
   anchor.href = "#";
+  exitBtn.href = "#";
+  exitBtn.innerHTML = '<span class="material-symbols-outlined"> close </span>';
 
   // set read status styling and text
   function setReadStyle(b) {
@@ -67,17 +71,27 @@ function buildCard(book, index) {
       readStatus.classList.remove("read");
     }
   }
-  setReadStyle(book);
-  
 
+  // call to set the read style
+  setReadStyle(book);
+
+  // toggle the read status on a book
   function handleReadStatus(e) {
+    e.preventDefault();
     const i = e.target.parentNode.parentNode.dataset.index;
     myLibrary[i].toggleRead();
     setReadStyle(myLibrary[i]);
   }
   readStatus.addEventListener("click", handleReadStatus);
 
+  exitBtn.addEventListener('click', (e)=> {
+    const i = e.target.parentNode.parentNode.dataset.index;
+    myLibrary.splice(i, 1);
+    renderLibrary(myLibrary);
+  })
+
   // append children
+  card.appendChild(exitBtn);
   card.appendChild(title);
   card.appendChild(author);
   card.appendChild(pages);

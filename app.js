@@ -1,5 +1,8 @@
 const myLibrary = [];
 const library = document.querySelector(".library");
+const modal = document.querySelector(".modal-container");
+const addBookBtn = document.querySelector(".new-book");
+const form = document.querySelector("form");
 
 function Book(title, author, pages, readStatus) {
   this.title = title;
@@ -88,9 +91,20 @@ function handleSubmit(e) {
     newBook.readStatus = false;
   }
 
+  document.getElementById('book-title').value = '';
+  document.getElementById("author").value = "";
+  document.getElementById("pages").value = "";
+  document.getElementById("read").checked = false;
+  console.log(e);
+
   addBookToLibrary(newBook);
   renderLibrary(myLibrary);
+  modal.classList.add("hidden");
 }
 
-const form = document.querySelector("form");
+
 form.addEventListener("submit", handleSubmit);
+
+addBookBtn.addEventListener('click', (e)=> {
+  modal.classList.remove("hidden");
+})

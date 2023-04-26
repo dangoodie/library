@@ -94,7 +94,6 @@
 .author {
   margin-top: 0;
   font-size: 1.2rem;
-  m
 }
 
 .pages {
@@ -127,8 +126,16 @@
   background-color: #15803c;
 }
 
+.read:hover {
+  background-color: #177238;
+}
+
 .not-read {
   background-color: rgb(218, 1, 1);
+}
+
+.not-read:hover {
+  background-color: rgb(182, 1, 1);
 }
 
 /* Popup form for adding books */

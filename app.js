@@ -5,7 +5,7 @@ const form = document.querySelector("form");
 const modal = document.querySelector(".modal-container");
 const modalExit = document.querySelector(".modal-exit");
 
-function Book(title, author, pages, readStatus) {
+function Book(title, author, pages, readStatus, index) {
   this.title = title;
   this.author = author;
   this.pages = pages;
@@ -28,7 +28,7 @@ function addBookToLibrary(book) {
   }
 }
 
-function buildCard(book) {
+function buildCard(book, index) {
   // build card div
   const card = document.createElement("div");
   card.classList.add("card");
@@ -38,25 +38,50 @@ function buildCard(book) {
   const title = document.createElement("p");
   const author = document.createElement("p");
   const pages = document.createElement("p");
+  const anchor = document.createElement("a");
   const readStatus = document.createElement("div");
 
   // add classes
   title.classList.add("book-title");
   author.classList.add("author");
   pages.classList.add("pages");
-  readStatus.classList.add("read-status");
+  readStatus.classList.add("read-status-btn");
+  anchor.classList.add("read-status");
 
   // adding text
   title.textContent = book.title;
   author.textContent = book.author;
   pages.textContent = book.pages;
-  readStatus.textContent = book.readStatus;
+  anchor.href = "#";
+
+  // set read status styling and text
+  function setReadStyle(book) {
+    if (book.readStatus) {
+      readStatus.textContent = "Read";
+      readStatus.classList.add("read");
+      readStatus.classList.remove("not-read");
+    } else {
+      readStatus.textContent = "Not Read";
+      readStatus.classList.add("not-read");
+      readStatus.classList.remove("read");
+    }
+  }
+  setReadStyle(book);
+  readStatus.dataset.index = index;
+
+  function handleReadStatus(e) {
+    const i = e.target.dataset.index;
+    myLibrary[i].readStatus = !myLibrary[i].readStatus;
+    setReadStyle(myLibrary[i]);
+  }
+  readStatus.addEventListener("click", handleReadStatus);
 
   // append children
   card.appendChild(title);
   card.appendChild(author);
   card.appendChild(pages);
-  card.appendChild(readStatus);
+  card.appendChild(anchor);
+  anchor.appendChild(readStatus);
 }
 
 function renderLibrary(books) {
@@ -67,8 +92,8 @@ function renderLibrary(books) {
   });
 
   // render all cards
-  books.forEach((book) => {
-    buildCard(book);
+  books.forEach((book, index) => {
+    buildCard(book, index);
   });
 }
 
@@ -92,6 +117,7 @@ function handleSubmit(e) {
     newBook.readStatus = false;
   }
 
+  // zero out inputs after submitting
   document.getElementById("book-title").value = "";
   document.getElementById("author").value = "";
   document.getElementById("pages").value = "";

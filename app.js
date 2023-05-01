@@ -5,16 +5,20 @@ const form = document.querySelector("form");
 const modal = document.querySelector(".modal-container");
 const modalExit = document.querySelector(".modal-exit");
 
-function Book(title, author, pages, readStatus) {
-  this.title = title;
+class Book {
+  constructor(title, author, pages, readStatus) {
+    this.title = title;
   this.author = author;
   this.pages = pages;
   this.readStatus = readStatus;
+  }
+
+  toggleRead() {
+    this.readStatus = !this.readStatus;
+  }
 }
 
-Book.prototype.toggleRead = function () {
-  this.readStatus = !this.readStatus;
-};
+
 
 function addBookToLibrary(book) {
   if (typeof book === "object") {
